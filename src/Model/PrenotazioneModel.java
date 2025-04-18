@@ -12,7 +12,7 @@ public class PrenotazioneModel {
     private String giorno;
     private String info;
     private float ora;
-
+    //ciao
     public PrenotazioneModel(Utenteloggatobean utente,Integer idPrenotazione,String emailUtente,float prezzo,String giorno, String info, float ora) {
         this.idPrenotazione = idPrenotazione;
         this.nome=utente.getNome();
