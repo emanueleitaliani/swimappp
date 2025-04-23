@@ -5,8 +5,9 @@ public class Userbean extends Utenteloggatobean {
     private String info;
     private String level;
 
-    public Userbean(private int age,private String info,private String level){
-       this.age = age;
+    public Userbean(CredenzialiBean credenzialiBean,String Email, String Nome, String Cognome, boolean ruolo,int age,String info,String level){
+        super(credenzialiBean, Email, Nome, Cognome, ruolo);
+        this.age = age;
        this.info = info;
        this.level=level;
     }

@@ -1,6 +1,6 @@
 package Pattern;
 
-public class AbstractState {
+public abstract class AbstractState {
 
     protected AbstractState(){
 
@@ -18,8 +18,7 @@ public class AbstractState {
     // Cambio stato
     protected void goNext(StateMachineImpl context, AbstractState nextState) {
         context.transition(nextState);
-        nextState.entry(context);  // chiama il metodo entry del nuovo stato
-        nextState.action(context); // esegue l’azione del nuovo stato
+        // esegue l’azione del nuovo stato
     }
 
     public abstract void action(StateMachineImpl context);
@@ -32,4 +31,4 @@ public class AbstractState {
 
 }
 
-}
+

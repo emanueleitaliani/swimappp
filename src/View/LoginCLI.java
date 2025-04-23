@@ -30,10 +30,10 @@ Utenteloggatobean utenteloggatobean;
         CredenzialiBean credenzialiBean = new CredenzialiBean();
         credenzialiBean.setEmail(email);
         credenzialiBean.setPassword(password);
-
+        AbstractState homeCLI;
         try {
             Utenteloggatobean utente = logincontroller.login(credenzialiBean);
-            AbstractState homeCLI;
+
 
             if (utente != null) {
                 System.out.println("\nLogin effettuato con successo!");
@@ -48,6 +48,7 @@ Utenteloggatobean utenteloggatobean;
                     homeCLI=new IstructorCLI(utente);
                 }
             }
+            goNext(context,homeCLI);
         } catch (UtentenonpresenteException | CredenzialisbagliateException e) {
             System.out.println("Errore durante il login: " + e.getMessage());
         }

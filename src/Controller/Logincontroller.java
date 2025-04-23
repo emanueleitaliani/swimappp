@@ -18,6 +18,7 @@ public class Logincontroller {
 
     public Utenteloggatobean login(CredenzialiBean credenzialiBean){
         CredenzialiModel credenzialiModel= new CredenzialiModel(email,password,ruolo);
+
         Utenteloggatobean utenteloggatobean = new Utenteloggatobean(credenzialiBean,nome,cognome,email,ruolo);
 
 
@@ -41,10 +42,10 @@ public class Logincontroller {
             return utenteloggatobean;
 
         } catch (UtentenonpresenteException un) {
-          throw new UtentenonpresenteException();
+           return null;
         } catch (CredenzialisbagliateException cl){
-            throw new CredenzialisbagliateException();
+            return null;
         }
-        return null;
+
     }
 }

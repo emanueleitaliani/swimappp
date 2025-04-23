@@ -2,19 +2,19 @@ package Pattern;
 
 public interface StateMachine {
 
-        /** Avvia la macchina nello stato iniziale */
-        void start();
 
         /** Esegue l'azione dello stato corrente */
-        void goNext();
+        public void goNext();
 
         /** Torna allo stato precedente */
-        void goBack();
+        public void goBack();
 
         /** Effettua la transizione verso un nuovo stato */
-        void transition(AbstractState nextState);
-
+        public void transition(AbstractState nextState);
         /** Ottiene lo stato corrente */
+        public void setState();
+
         AbstractState getState();
+        void start();
 }
 
