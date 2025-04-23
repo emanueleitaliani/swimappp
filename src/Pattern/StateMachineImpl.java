@@ -29,4 +29,20 @@ public class StateMachineImpl implements StateMachine{
            this.currentState.entry(this);
        }
     }
+    public Utenteloggatobean getUtenteloggatobean() {
+        return utenteloggatobean;
+    }
+    public void setUtenteloggatobean(Utenteloggatobean utenteloggatobean) {
+        this.utenteloggatobean = utenteloggatobean;
+    }
+
+
+    public AbstractState getState(){
+        return currentState;
+    }
+
+    public void setState(){
+        this.currentState = null;
+    }
+
 }
