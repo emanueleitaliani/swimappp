@@ -5,13 +5,17 @@ import Bean.Utenteloggatobean;
 import Controller.Logincontroller;
 import Exceptions.CredenzialisbagliateException;
 import Exceptions.UtentenonpresenteException;
+import Pattern.AbstractState;
+import Pattern.StateMachineImpl;
 
 import java.util.Scanner;
 
-public class LoginCLI implements AppState {
+public class LoginCLI extends AbstractState {
 
-    @Override
-    public void mostraMenu(AppContext context) {
+
+Utenteloggatobean utenteloggatobean;
+
+    public void mostraSchermata(StateMachineImpl context) {
         Scanner scanner = new Scanner(System.in);
         Logincontroller logincontroller = new Logincontroller();
 
@@ -29,6 +33,8 @@ public class LoginCLI implements AppState {
 
         try {
             Utenteloggatobean utente = logincontroller.login(credenzialiBean);
+            AbstractState homeCLI;
+
             if (utente != null) {
                 System.out.println("\nLogin effettuato con successo!");
                 System.out.println("Benvenuto/a, " + utente.getNome() + " " + utente.getCognome());
@@ -37,9 +43,9 @@ public class LoginCLI implements AppState {
 
                 // Cambio stato in base al ruolo
                 if (utente.isIstructor()) {
-                    context.setStato(new UserCLI(utente));
+                    homeCLI=new UserCLI(utente);
                 } else {
-                    context.setStato(new IstructorCLI(utente));
+                    homeCLI=new IstructorCLI(utente);
                 }
             }
         } catch (UtentenonpresenteException | CredenzialisbagliateException e) {

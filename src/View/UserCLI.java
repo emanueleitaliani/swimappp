@@ -3,7 +3,7 @@ package View;
 import Bean.Utenteloggatobean;
 import Other.Stampa;
 import Pattern.AbstractState;
-import Pattern.StateMachineImpl
+import Pattern.StateMachineImpl;
 import java.util.Scanner;
 import java.util.InputMismatchException;
 public class UserCLI extends AbstractState {
@@ -27,10 +27,10 @@ public class UserCLI extends AbstractState {
             switch(choice){
                 case(1):
                     // Modificato per cercare una lezione di nuoto
-                    goNext(context, new PrenotaLezioneNuotoCLI(user));
+                    goNext(context, new PrenotaLezioneCLI(user));
                     break;
                 case(2):
-                    // Modificato per gestire le prenotazioni di lezioni di nuoto
+                    // Modificato per gestire le creazioni di schede
                     goNext(context, new CreaschedaCLI(user));
                     break;
                 default:
@@ -47,10 +47,10 @@ public class UserCLI extends AbstractState {
     }
 
     @Override
-    public void mostraMenu(){
+    public void mostraSchermata(){
     // Modificato per SwimApp
       Stampa.println("   1. Prenota Lezione di Nuoto");
-      Stampa.println("   2. Gestisci Prenotazioni di Nuoto");
+      Stampa.println("   2. Crea scheda");
       Stampa.println("   0. Logout");
       Stampa.print("Opzione scelta: ");
     }
