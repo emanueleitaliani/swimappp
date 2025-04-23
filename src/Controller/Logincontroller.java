@@ -7,6 +7,7 @@ import Model.UtenteloggatoModel;
 import Model.CredenzialiModel;
 import Exceptions.CredenzialisbagliateException;
 import Exceptions.UtentenonpresenteException;
+import Other.FactoryDao;
 
 public class Logincontroller {
     private String nome;
@@ -26,7 +27,9 @@ public class Logincontroller {
 
             // collegarsi al Dao per ottenere gli utenti
 
-            UtenteloggatoModel utenteloggatoModel = userDao.login(credenzialiModel);
+            UserDao userDAO = FactoryDao.getUserDAO();
+
+            UtenteloggatoModel utenteloggatoModel = userDAO.login(credenzialiModel);
 
 
             utenteloggatobean.setNome(utenteloggatoModel.getNome());
@@ -38,9 +41,9 @@ public class Logincontroller {
             return utenteloggatobean;
 
         } catch (UtentenonpresenteException un) {
-          throw new UtentenonpresenteException("Utente non è presente");
+          throw new UtentenonpresenteException();
         } catch (CredenzialisbagliateException cl){
-            throw new CredenzialisbagliateException("Credenziali sbagliate");
+            throw new CredenzialisbagliateException();
         }
         return null;
     }
