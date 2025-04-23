@@ -3,6 +3,7 @@ package View;
 import Bean.Utenteloggatobean;
 import Other.Stampa;
 import Pattern.AbstractState;
+import Pattern.Initialstate;
 import Pattern.StateMachineImpl;
 import java.util.Scanner;
 import java.util.InputMismatchException;
@@ -27,12 +28,11 @@ public class UserCLI extends AbstractState {
             switch(choice){
                 case(1):
                     // Modificato per cercare una lezione di nuoto
-                    goNext(context, new PrenotaLezioneCLI(user));
+                    goNext(context, new PrenotaLezioneCLI());
                     break;
                 case(2):
                     // Modificato per gestire le creazioni di schede
-                    goNext(context, new CreaschedaCLI(user));
-                    break;
+                    // opzioni per prenotare scheda
                 default:
                     Stampa.errorPrint("Input invalido. Scegliere un'opzione tra quelle disponibili: ");
                     break;
@@ -43,7 +43,7 @@ public class UserCLI extends AbstractState {
         }
      }
 
-     goNext(context, new InitialState());
+     goNext(context, new Initialstate());
     }
 
     @Override

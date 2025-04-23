@@ -7,11 +7,13 @@ import Model.CredenzialiModel;
 
 // uso interfaccia perchè devo solo chiamare i metodi
 public interface UserDao {
-  UtenteloggatoModel login(CredenzialiModel credenzialiModel)throws UtentenonpresenteException,CredenzialisbagliateException;
+  UtenteloggatoModel loginMethod(CredenzialiModel credenzialiModel)throws UtentenonpresenteException,CredenzialisbagliateException;
 
   void registrazioneMethod(UtenteloggatoModel registrazioneModel);
 
   void controllaEmailMethod(UtenteloggatoModel registrazioneModel) throws EmailgiainusoException;
+
+  public void registraIstruttoreMethod(String email, String nome, String cognome) ;
 
 }
 

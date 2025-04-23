@@ -7,6 +7,7 @@ public class UtenteloggatoModel {
     private String Cognome;
     protected boolean isIstructor;
 
+    public UtenteloggatoModel() {};
     public UtenteloggatoModel(CredenzialiModel credenziali, String Nome, String Cognome, boolean isIstructor){
         this.credenziali = credenziali;
         this.Nome = Nome;

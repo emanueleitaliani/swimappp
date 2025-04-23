@@ -9,11 +9,11 @@ public class StateMachineImpl implements StateMachine{
 
     public StateMachineImpl(){
         this.cronologiaStati = new ArrayDeque<>();
-        this.currentState = new InitialState();
+        this.currentState = new Initialstate();
     }
 
     public void start(){
-        this.currentState = new InitialState();
+        this.currentState = new Initialstate();
         goNext();
     }
     public void goNext(){
@@ -29,6 +29,17 @@ public class StateMachineImpl implements StateMachine{
            this.currentState.entry(this);
        }
     }
+    public void transition(AbstractState nextState) {
+        if (currentState != null) {
+            currentState.exit(this);
+            cronologiaStati.push(currentState);
+        }
+        currentState = nextState;
+        currentState.entry(this);
+    }
+
+
+
     public Utenteloggatobean getUtenteloggatobean() {
         return utenteloggatobean;
     }

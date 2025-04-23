@@ -8,6 +8,8 @@ public class IstruttoreModel extends UtenteloggatoModel {
     private float  serviceFee;
     private int age;
 
+    public IstruttoreModel(){}
+
     public IstruttoreModel(CredenzialiModel credenziali, String nome, String cognome, boolean isIstruttore,
                            String certificate, String swimmingPool, float serviceFee, int age) {
         // Chiamata al costruttore della classe base

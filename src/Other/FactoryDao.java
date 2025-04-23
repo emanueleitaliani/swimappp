@@ -26,9 +26,7 @@ public class FactoryDao {
         }
 
         String daoType = properties.getProperty("persistence.type");
-        if ("MYSQL".equalsIgnoreCase(daoType)) {
-            return new UserDAOMySQL();
-        } else if ("JSON".equalsIgnoreCase(daoType)) {
+        if ("JSON".equalsIgnoreCase(daoType)) {
             return new UserDAOJSON();
         } else {
             throw new PersnonvalidaException();

@@ -16,8 +16,8 @@ public class Logincontroller {
     private String password;
     private boolean ruolo;
 
-    public Utenteloggatobean login(CredenzialiBean credenzialiBean){
-        CredenzialiModel credenzialiModel= new CredenzialiModel(email,password,ruolo);
+    public Utenteloggatobean login(CredenzialiBean credenzialiBean)throws CredenzialisbagliateException,UtentenonpresenteException{
+        CredenzialiModel credenzialiModel= new CredenzialiModel(email,password);
 
         Utenteloggatobean utenteloggatobean = new Utenteloggatobean(credenzialiBean,nome,cognome,email,ruolo);
 
@@ -30,7 +30,7 @@ public class Logincontroller {
 
             UserDao userDAO = FactoryDao.getUserDAO();
 
-            UtenteloggatoModel utenteloggatoModel = userDAO.login(credenzialiModel);
+            UtenteloggatoModel utenteloggatoModel = userDAO.loginMethod(credenzialiModel);
 
 
             utenteloggatobean.setNome(utenteloggatoModel.getNome());
