@@ -1,6 +1,5 @@
 package Controller;
 import Dao.UserDao;
-import Exceptions.PersnonvalidaException;
 import Model.CredenzialiModel;
 import Model.UtenteloggatoModel;
 import Bean.Utenteloggatobean;
@@ -34,8 +33,6 @@ public class Registrazionecontroller {
         } catch (EmailgiainusoException e) {
             throw new EmailgiainusoException();
             //il controller applicativo si limita a propagarla al controller grafico
-        } catch (PersnonvalidaException e){
-            Stampa.errorPrint("Persistenza non valida.");
         }
     }
 }

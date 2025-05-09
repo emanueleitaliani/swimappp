@@ -63,12 +63,12 @@ public class QueryLogin {
             String nome = registrazioneModel.getNome();
             String cognome = registrazioneModel.getCognome();
             String password = registrazioneModel.getCredenziali().getPassword();
-            Boolean ruolo = registrazioneModel.isIstructor();
+            Boolean IsIstructor = registrazioneModel.isIstructor();
 
 
 
             // Esegui prima l'inserimento nella tabella 'utente'
-            String sql = String.format(Query.REGISTRAZIONE, email, nome, cognome, password, ruolo);
+            String sql = String.format(Query.REGISTRAZIONE, nome, cognome,email,IsIstructor,password);
             stmt.executeUpdate(sql);
 
         }catch (SQLException e){
@@ -77,6 +77,24 @@ public class QueryLogin {
         }
 
     }
+    public static void registraIstruttore(Statement stmt, String email, String nome, String cognome) {
+        String query = String.format(
+                "INSERT INTO tutor (email, nome, cognome) VALUES ('%s', '%s', '%s')",
+                email, nome, cognome
+        );
+
+        try {
+            int rowsAffected = stmt.executeUpdate(query);
+            if (rowsAffected > 0) {
+                Stampa.println("Tutor registrato con successo.");
+            } else {
+                Stampa.println("Nessun tutor inserito.");
+            }
+        } catch (SQLException e) {
+            Stampa.println("Errore durante la registrazione del tutor: " + e.getMessage());
+        }
+    }
+
 
     private static void handleException(Exception e) {
         Stampa.errorPrint(String.format("QueryLogin: %s", e.getMessage()));

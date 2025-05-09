@@ -50,7 +50,7 @@ public class UserCLI extends AbstractState {
     public void mostraSchermata(){
     // Modificato per SwimApp
       Stampa.println("   1. Prenota Lezione di Nuoto");
-      Stampa.println("   2. Crea scheda");
+      Stampa.println("   2. Gestisci Profilo");
       Stampa.println("   0. Logout");
       Stampa.print("Opzione scelta: ");
     }

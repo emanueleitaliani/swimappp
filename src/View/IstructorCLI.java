@@ -2,7 +2,12 @@ package View;
 
 import Pattern.AbstractState;
 import Bean.Utenteloggatobean;
+import Pattern.Initialstate;
 import Pattern.StateMachineImpl;
+import Other.Stampa;
+
+import java.util.InputMismatchException;
+import java.util.Scanner;
 
 public class IstructorCLI extends AbstractState{
     private final Utenteloggatobean utente;
@@ -11,17 +16,51 @@ public class IstructorCLI extends AbstractState{
     }
     @Override
     public void action(StateMachineImpl context) {
-        // Qui puoi inserire il codice da eseguire quando questo stato è attivo
-        System.out.println("Benvenuto, " + utente.getCredenziali().getEmail() + " (ISTRUTTORE)");
+        Scanner scan = new Scanner(System.in);
+        int choice;
+        while((choice = scan.nextInt()) != 0) {
 
-        // Esempio di menu:
-        System.out.println("1. Visualizza studenti");
-        System.out.println("2. Aggiungi esercizio");
-        System.out.println("3. Logout");
+            try{
+                switch(choice){
+                    case(1):
+                        // Modificato per cercare una lezione di nuoto
+                        goNext(context, new AssegnaschedaCLI());
+                        break;
+                    case(2):
+                        // Modificato per gestire le creazioni di schede
+                        // opzioni per prenotare scheda
+                    default:
+                        Stampa.errorPrint("Input invalido. Scegliere un'opzione tra quelle disponibili: ");
+                        break;
+                }
+            } catch (InputMismatchException e){
+                Stampa.errorPrint("Input non valido. Per favore, inserisci un numero intero: ");
+                scan.nextLine(); // Consuma l'input non valido)
+            }
+        }
 
-        // Simulazione uscita dallo stato (puoi legarlo all'input utente se vuoi)
-        // goBack(context); // oppure goNext(context, new AltraViewState(...));
+        goNext(context, new Initialstate());
     }
+    public void mostraSchermata() {
+        Stampa.println("1.assegna scheda");
+        Stampa.println("0.Logout");
+        Stampa.print("Opzione scelta:");
+    }
+    @Override
+    public void stampaBenvenuto() {
+        Stampa.println(" ");
+        Stampa.println("-------------------Benvenuto nella home dell'istruttore-------------------");
+        Stampa.println("Ciao" + " " + this.utente.getNome() + ",scegli cosa vuoi fare:");
+    }
+    @Override
+    public void entry(StateMachineImpl context) {
+        stampaBenvenuto();
+        mostraSchermata();
+    }
+
+
+        // goBack(context); // oppure goNext(context, new AltraViewState(...));
+
 }
 
 

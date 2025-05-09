@@ -13,7 +13,7 @@ import java.util.Scanner;
 public class LoginCLI extends AbstractState {
 
 
-Utenteloggatobean utenteloggatobean;
+
 
     public void action(StateMachineImpl context) {
         Scanner scanner = new Scanner(System.in);
@@ -27,7 +27,7 @@ Utenteloggatobean utenteloggatobean;
         Stampa.println("Inserisci password: ");
         String password = scanner.nextLine();
 
-        AbstractState homeCLI=null;
+
         try {
             CredenzialiBean credenzialiBean = new CredenzialiBean();
             credenzialiBean.setEmail(email);
@@ -42,14 +42,17 @@ Utenteloggatobean utenteloggatobean;
                 Stampa.println("Email: " + utente.getEmail());
                 Stampa.println("Ruolo: " + (utente.isIstructor() ? "Istruttore" : "Studente"));
 
+                AbstractState homeCLI;
                 // Cambio stato in base al ruolo
                 if (utente.isIstructor()) {
-                    homeCLI=new UserCLI(utente);
+                    homeCLI = new IstructorCLI(utente);
                 } else {
-                    homeCLI=new IstructorCLI(utente);
+                    homeCLI = new UserCLI(utente);
                 }
+
+                goNext(context, homeCLI);
             }
-            goNext(context,homeCLI);
+
         } catch (UtentenonpresenteException | CredenzialisbagliateException e) {
             Stampa.println("Errore durante il login: " + e.getMessage());
         }

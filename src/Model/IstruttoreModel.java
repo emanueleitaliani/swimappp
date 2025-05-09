@@ -3,6 +3,7 @@ package Model;
 import Model.CredenzialiModel;
 
 public class IstruttoreModel extends UtenteloggatoModel {
+    private CredenzialiModel credenziali;
     private String certificate;
     private String swimmingPool;
     private float  serviceFee;

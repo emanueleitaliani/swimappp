@@ -9,8 +9,8 @@ import java.io.*;
 import java.util.HashMap;
 import java.util.Map;
 public class UserDAOJSON implements UserDao {
+    private static final String FILE_PATH = System.getProperty("user.home") + "/swimapp_users.txt";
 
-    private static final String FILE_PATH = "src/main/resources/com/example/swimapp/persistenza/users.json";
     private final Map<String, UtenteloggatoModel> users = new HashMap<>();
 
     public UserDAOJSON() {
@@ -43,6 +43,15 @@ public class UserDAOJSON implements UserDao {
     }
 
     //eventualmente modificare fromString
+    public void registraIstruttoreMethod(String email,String nome, String cognome){
+        UtenteloggatoModel istruttore = users.get(email);
+        if (istruttore != null) {
+            istruttore.setNome(nome);
+            istruttore.setCognome(cognome);
+            istruttore.isIstructor();
+            saveToFile();
+        }
+    }
     private void loadFromFile() {
         try (BufferedReader reader = new BufferedReader(new FileReader(FILE_PATH))) {
             String line;

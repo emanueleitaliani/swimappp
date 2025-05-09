@@ -8,6 +8,7 @@ import Model.CredenzialiModel;
 import Exceptions.CredenzialisbagliateException;
 import Exceptions.UtentenonpresenteException;
 import Other.FactoryDao;
+import Other.Stampa;
 
 public class Logincontroller {
     private String nome;
@@ -32,14 +33,18 @@ public class Logincontroller {
 
             UtenteloggatoModel utenteloggatoModel = userDAO.loginMethod(credenzialiModel);
 
-
-            utenteloggatobean.setNome(utenteloggatoModel.getNome());
-            utenteloggatobean.setCognome(utenteloggatoModel.getCognome());
-            utenteloggatobean.setEmail(utenteloggatoModel.getCredenziali().getEmail());
-            utenteloggatobean.setRuolo(utenteloggatoModel.isIstructor());
-
+            if (utenteloggatoModel != null && utenteloggatoModel.getCredenziali() != null) {
+                utenteloggatobean.setNome(utenteloggatoModel.getNome());
+                utenteloggatobean.setCognome(utenteloggatoModel.getCognome());
+                utenteloggatobean.setEmail(utenteloggatoModel.getCredenziali().getEmail());
+                utenteloggatobean.setRuolo(utenteloggatoModel.isIstructor());
+                return utenteloggatobean;
+            }else {
+                Stampa.errorPrint("❌ Credenziali mancanti o errate");
+                return null;
+            }
             // prende dalla Dao le credenziali dell'utente
-            return utenteloggatobean;
+
 
         } catch (UtentenonpresenteException un) {
            return null;

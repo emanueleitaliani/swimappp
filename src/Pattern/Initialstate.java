@@ -2,7 +2,7 @@ package Pattern;
 import Other.Stampa;
 import View.LoginCLI;
 import View.RegistrazioneCLI;
-
+import Other.Stampa;
 import java.util.Scanner;
 
 public class Initialstate extends AbstractState {
@@ -12,7 +12,7 @@ public class Initialstate extends AbstractState {
         mostraSchermata();
 
         Scanner scanner = new Scanner(System.in);
-        System.out.print("Scegli un'opzione: [1] Login | [2] Registrazione | [0] Esci: ");
+        Stampa.println("Scegli un'opzione: [1] Login | [2] Registrazione | [0] Esci: ");
         String scelta = scanner.nextLine();
 
         switch (scelta) {
@@ -25,11 +25,11 @@ public class Initialstate extends AbstractState {
                 goNext(context,nextState);
                 break;
             case "0":
-                System.out.println("Uscita dall'applicazione...");
+                Stampa.println("Uscita dall'applicazione...");
                 System.exit(0);
                 break;
             default:
-                System.out.println("Scelta non valida. Riprova.");
+                Stampa.println("Scelta non valida. Riprova.");
                   // Ricomincia dallo stesso stato
                 break;
         }
@@ -37,10 +37,10 @@ public class Initialstate extends AbstractState {
 
     @Override
     public void mostraSchermata() {
-        System.out.println("\n--- Benvenuto nell'applicazione SwimApp! ---");
-        System.out.println("1. Effettua il Login");
-        System.out.println("2. Registrati");
-        System.out.println("0. Esci");
+        Stampa.println("\n--- Benvenuto nell'applicazione SwimApp! ---");
+        Stampa.println("1. Effettua il Login");
+        Stampa.println("2. Registrati");
+        Stampa.println("0. Esci");
     }
 
     @Override

@@ -2,10 +2,9 @@ package View;
 
 import Bean.CredenzialiBean;
 import Bean.Utenteloggatobean;
-import Bean.Userbean;
 import Controller.Registrazionecontroller;
+import Exceptions.EmailgiainusoException;
 import Exceptions.EmailnonvalidaException;
-import Model.CredenzialiModel;
 import Pattern.AbstractState;
 import Pattern.StateMachineImpl;
 import Other.Stampa;
@@ -58,7 +57,12 @@ public class RegistrazioneCLI extends AbstractState {
         utente.setRuolo(isIstructor);
 
         Registrazionecontroller registrazionecontroller= new Registrazionecontroller();
-        registrazionecontroller.registrazione(utente);
+        try {
+            registrazionecontroller.registrazione(utente);
+        } catch (EmailgiainusoException e) {
+            Stampa.errorPrint("❌ Email già in uso.");
+            return; // interrompe l'esecuzione della registrazione
+        }
 
         // Aggiungi l'utente al context
         context.setUtenteloggatobean(utente);
@@ -85,7 +89,7 @@ public class RegistrazioneCLI extends AbstractState {
     public void exit(StateMachineImpl context){
         Stampa.println("riportato alla home");
     }
-
+    @Override
     public void stampaBenvenuto() {
         Stampa.println("Benvenuto inserisci le credenziali per registrarti");
     }
