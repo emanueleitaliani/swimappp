@@ -3,12 +3,12 @@ package Model;
 public class CredenzialiModel {
     private String email;
     private String password;
-    private boolean ruolo;
 
-    public CredenzialiModel(String email, String password, boolean ruolo){
+    public CredenzialiModel(){}
+
+    public CredenzialiModel(String email, String password){
         this.email = email;
         this.password = password;
-        this.ruolo = ruolo;
     }
     public String getEmail() {
         return email;
@@ -26,11 +26,5 @@ public class CredenzialiModel {
     public void setPassword(String password) {
         this.password = password;
     }
-    public boolean isRuolo() {
-        return ruolo;
 
-    }
-    public void setRuolo(boolean ruolo) {
-        this.ruolo = ruolo;
-    }
 }

@@ -8,8 +8,8 @@ public class Userbean extends Utenteloggatobean {
     public Userbean(CredenzialiBean credenzialiBean,String Email, String Nome, String Cognome, boolean ruolo,int age,String info,String level){
         super(credenzialiBean, Email, Nome, Cognome, ruolo);
         this.age = age;
-       this.info = info;
-       this.level=level;
+        this.info = info;
+        this.level=level;
     }
     public int getAge() {
         return age;

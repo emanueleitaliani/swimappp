@@ -1,5 +1,6 @@
 package Pattern;
-
+import View.RegistrazioneCLI;
+import View.LoginCLI;
 public abstract class AbstractState {
 
     protected AbstractState(){

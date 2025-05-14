@@ -7,50 +7,54 @@ import Exceptions.CredenzialisbagliateException;
 import Exceptions.UtentenonpresenteException;
 import Pattern.AbstractState;
 import Pattern.StateMachineImpl;
-
+import Other.Stampa;
 import java.util.Scanner;
 
 public class LoginCLI extends AbstractState {
 
 
-Utenteloggatobean utenteloggatobean;
 
-    public void mostraSchermata(StateMachineImpl context) {
+
+    public void action(StateMachineImpl context) {
         Scanner scanner = new Scanner(System.in);
         Logincontroller logincontroller = new Logincontroller();
 
-        System.out.println("=== LOGIN UTENTE ===");
+        Stampa.println("=== LOGIN UTENTE ===");
 
-        System.out.print("Inserisci email: ");
+        Stampa.println("Inserisci email: ");
         String email = scanner.nextLine();
 
-        System.out.print("Inserisci password: ");
+        Stampa.println("Inserisci password: ");
         String password = scanner.nextLine();
 
-        CredenzialiBean credenzialiBean = new CredenzialiBean();
-        credenzialiBean.setEmail(email);
-        credenzialiBean.setPassword(password);
-        AbstractState homeCLI;
+
         try {
+            CredenzialiBean credenzialiBean = new CredenzialiBean();
+            credenzialiBean.setEmail(email);
+            credenzialiBean.setPassword(password);
+
             Utenteloggatobean utente = logincontroller.login(credenzialiBean);
 
 
             if (utente != null) {
-                System.out.println("\nLogin effettuato con successo!");
-                System.out.println("Benvenuto/a, " + utente.getNome() + " " + utente.getCognome());
-                System.out.println("Email: " + utente.getEmail());
-                System.out.println("Ruolo: " + (utente.isIstructor() ? "Istruttore" : "Studente"));
+                Stampa.println("\nLogin effettuato con successo!");
+                Stampa.println("Benvenuto/a, " + utente.getNome() + " " + utente.getCognome());
+                Stampa.println("Email: " + utente.getEmail());
+                Stampa.println("Ruolo: " + (utente.isIstructor() ? "Istruttore" : "Studente"));
 
+                AbstractState homeCLI;
                 // Cambio stato in base al ruolo
                 if (utente.isIstructor()) {
-                    homeCLI=new UserCLI(utente);
+                    homeCLI = new IstructorCLI(utente);
                 } else {
-                    homeCLI=new IstructorCLI(utente);
+                    homeCLI = new UserCLI(utente);
                 }
+
+                goNext(context, homeCLI);
             }
-            goNext(context,homeCLI);
+
         } catch (UtentenonpresenteException | CredenzialisbagliateException e) {
-            System.out.println("Errore durante il login: " + e.getMessage());
+            Stampa.println("Errore durante il login: " + e.getMessage());
         }
     }
 }

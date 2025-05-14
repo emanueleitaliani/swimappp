@@ -16,7 +16,7 @@ public class Connect {
     private String password;
     private static Connect instance = null;
     private Connection conn;
-    private static final String PATH = "src/main/resources/com/example/swimapp/connection.properties";
+    private static final String PATH = "resources/resources/connection.properties";
 
     private Connect() {}
 
@@ -29,14 +29,14 @@ public class Connect {
     }
 
     public synchronized Connection getDBConnection() {
-        if (this.conn == null) {
-            getInfo();
-
-            try{
+        try {
+            if (this.conn == null|| this.conn.isClosed()) {
+                getInfo();
                 this.conn = DriverManager.getConnection(jdbc, user, password);
-            } catch (SQLException e){
-                Stampa.errorPrint(String.format("Error in Connect.java %s", e.getMessage()));
+
             }
+        }catch (SQLException e){
+                Stampa.errorPrint(String.format("Error in Connect.java %s", e.getMessage()));
 
         }
         return this.conn;
