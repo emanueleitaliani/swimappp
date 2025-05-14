@@ -6,7 +6,7 @@ public class EsercizioBean {
     private int distanza;
     private String info;
 
-    public void Eserciziobean(String nome, String stile, int distanza, String info){
+    public EsercizioBean(String nome, String stile, int distanza, String info){
         this.nome=nome;
         this.stile=stile;
         this.distanza=distanza;
