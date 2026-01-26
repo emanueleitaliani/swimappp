@@ -5,6 +5,9 @@ public class CredenzialiModel {
     private String password;
 
     public CredenzialiModel(){}
+    public CredenzialiModel(String email){
+        this.email = email;
+    }
 
     public CredenzialiModel(String email, String password){
         this.email = email;

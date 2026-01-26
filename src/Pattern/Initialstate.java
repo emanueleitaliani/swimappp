@@ -1,8 +1,8 @@
 package Pattern;
 import Other.Stampa;
-import View.LoginCLI;
-import View.RegistrazioneCLI;
-import Other.Stampa;
+import CLI.LoginCLI;
+import CLI.RegistrazioneCLI;
+
 import java.util.Scanner;
 
 public class Initialstate extends AbstractState {

@@ -1,4 +1,4 @@
-package View;
+package CLI;
 import Pattern.AbstractState;
 import Pattern.StateMachineImpl;
 

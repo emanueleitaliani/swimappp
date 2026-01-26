@@ -1,4 +1,4 @@
-package View;
+package CLI;
 
 import Bean.CredenzialiBean;
 import Bean.Utenteloggatobean;
@@ -29,9 +29,8 @@ public class LoginCLI extends AbstractState {
 
 
         try {
-            CredenzialiBean credenzialiBean = new CredenzialiBean();
-            credenzialiBean.setEmail(email);
-            credenzialiBean.setPassword(password);
+            CredenzialiBean credenzialiBean = new CredenzialiBean(email,password);
+
 
             Utenteloggatobean utente = logincontroller.login(credenzialiBean);
 
@@ -39,8 +38,8 @@ public class LoginCLI extends AbstractState {
             if (utente != null) {
                 Stampa.println("\nLogin effettuato con successo!");
                 Stampa.println("Benvenuto/a, " + utente.getNome() + " " + utente.getCognome());
-                Stampa.println("Email: " + utente.getEmail());
-                Stampa.println("Ruolo: " + (utente.isIstructor() ? "Istruttore" : "Studente"));
+                Stampa.println("Email: " + utente.getCredenziali().getEmail());
+                Stampa.println("Ruolo: " + (utente.isIstructor() ? "Istruttore" : "Utente"));
 
                 AbstractState homeCLI;
                 // Cambio stato in base al ruolo

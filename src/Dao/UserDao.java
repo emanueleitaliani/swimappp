@@ -13,7 +13,7 @@ public interface UserDao {
 
   void controllaEmailMethod(UtenteloggatoModel registrazioneModel) throws EmailgiainusoException;
 
-  public void registraIstruttoreMethod(String email, String nome, String cognome) ;
+  void registraIstruttoreMethod(String email, String nome, String cognome) ;
 
 }
 

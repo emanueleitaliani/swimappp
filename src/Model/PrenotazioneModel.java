@@ -1,6 +1,7 @@
 package Model;
 
 import Bean.Utenteloggatobean;
+import Other.StatoPrenotazione;
 
 public class PrenotazioneModel {
     private int idPrenotazione;
@@ -12,22 +13,30 @@ public class PrenotazioneModel {
     private String giorno;
     private String info;
     private float ora;
-    //ciao
-    public PrenotazioneModel(Utenteloggatobean utente,Integer idPrenotazione,String emailUtente,float prezzo,String giorno, String info, float ora) {
+    private StatoPrenotazione status;
+
+    public PrenotazioneModel() {};
+    public PrenotazioneModel(Utenteloggatobean utente,Integer idPrenotazione,String emailUtente,float prezzo,String giorno, String info, float ora,StatoPrenotazione status) {
         this.idPrenotazione = idPrenotazione;
         this.nome=utente.getNome();
         this.cognome=utente.getCognome();
-        this.emailIstruttore=utente.getEmail();
+        this.emailIstruttore=utente.getCredenziali().getEmail();
         this.emailUtente=emailUtente;
         this.prezzo=prezzo;
         this.giorno=giorno;
         this.info=info;
         this.ora=ora;
+        this.status=status;
 
     }
     public int getIdPrenotazione() {
         return idPrenotazione;
     }
+
+    public void setIdPrenotazione(int idPrenotazione) {
+        this.idPrenotazione = idPrenotazione;
+    }
+
     public String getNome() {
         return nome;
     }
@@ -78,5 +87,7 @@ public class PrenotazioneModel {
     public void setInfo(String info) {
         this.info = info;
     }
+    public StatoPrenotazione getStatus() { return status; }
+    public void setStatus(StatoPrenotazione status) { this.status = status; }
 
 }

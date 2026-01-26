@@ -1,5 +1,5 @@
 package Bean;
-
+import Other.StatoPrenotazione;
 public class Prenotazionebean {
     private int idPrenotazione;
     private String nome;
@@ -10,20 +10,26 @@ public class Prenotazionebean {
     private String info;
     private float prezzo;
     private float hour ;
+    private StatoPrenotazione status;
 
-    public Prenotazionebean(){}
-
-    public Prenotazionebean(Utenteloggatobean istruttore,Integer idPrenotazione,String cognome,String Nome,String emailIstruttore,String emailUser,String day,String info,float prezzo,float hour) {
+    public Prenotazionebean() {}
+    public Prenotazionebean(Utenteloggatobean istruttore,Integer idPrenotazione,String cognome,String Nome,String emailIstruttore,String emailUser,String giorno,String info,float prezzo,float hour,StatoPrenotazione status) {
         this.idPrenotazione = idPrenotazione;
         this.nome= istruttore.getNome();
         this.cognome=istruttore.getCognome();
-        this.emailIstruttore=istruttore.getEmail();
+        this.emailIstruttore=istruttore.getCredenziali().getEmail();
         this.emailUser=emailUser;
         this.giorno=giorno;
         this.info=info;
         this.prezzo=prezzo;
         this.hour=hour;
+        this.status = status;
     }
+
+    public void setIdPrenotazione(int idPrenotazione) {
+        this.idPrenotazione = idPrenotazione;
+    }
+
     public int getIdPrenotazione() {
         return idPrenotazione;
     }
@@ -89,6 +95,9 @@ public class Prenotazionebean {
     public void setHour(float hour) {
       this.hour = hour;
     }
+
+    public StatoPrenotazione getStatus() { return status; }
+    public void setStatus(StatoPrenotazione status) { this.status = status; }
 
 }
 

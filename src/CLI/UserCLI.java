@@ -1,4 +1,4 @@
-package View;
+package CLI;
 
 import Bean.Utenteloggatobean;
 import Other.Stampa;
@@ -26,13 +26,15 @@ public class UserCLI extends AbstractState {
 
         try{
             switch(choice){
-                case(1):
-                    // Modificato per cercare una lezione di nuoto
-                    goNext(context, new PrenotaLezioneCLI());
-                    break;
-                case(2):
+                case (1):
+                    goNext(context, new GestisciPrenotazioneCLI(user));
                     // Modificato per gestire le creazioni di schede
                     // opzioni per prenotare scheda
+                    break;
+                case (2):
+                    goNext(context,new CercaLezioneCLI(user));
+
+                    break;
                 default:
                     Stampa.errorPrint("Input invalido. Scegliere un'opzione tra quelle disponibili: ");
                     break;
@@ -49,8 +51,8 @@ public class UserCLI extends AbstractState {
     @Override
     public void mostraSchermata(){
     // Modificato per SwimApp
-      Stampa.println("   1. Prenota Lezione di Nuoto");
-      Stampa.println("   2. Gestisci Profilo");
+      Stampa.println("   1. Gestisci Prenotazioni");
+      Stampa.println("   2. Cerca Lezione");
       Stampa.println("   0. Logout");
       Stampa.print("Opzione scelta: ");
     }

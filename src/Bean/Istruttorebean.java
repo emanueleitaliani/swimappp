@@ -6,14 +6,17 @@ public class Istruttorebean extends Utenteloggatobean {
     private float  serviceFee;
     private int age;
 
-    public Istruttorebean(CredenzialiBean credenzialiBean,String Email, String Nome, String Cognome, boolean ruolo, String certificate, String swimmingPool, float serviceFee,int age){
+    public Istruttorebean(CredenzialiBean credenzialiBean, String Nome, String Cognome, boolean ruolo, String certificate, String swimmingPool, float serviceFee,int age){
 
-        super(credenzialiBean, Email, Nome, Cognome, ruolo);
+        super(credenzialiBean, Nome, Cognome, ruolo);
         this.certificate = certificate;
         this.swimmingPool = swimmingPool;
         this.serviceFee = serviceFee;
         this.age = age;
     }
+
+
+
     public String getCertificate(){
         return certificate;
     }

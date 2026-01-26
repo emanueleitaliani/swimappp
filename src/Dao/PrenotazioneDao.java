@@ -1,48 +1,18 @@
 package Dao;
+
+import Bean.Prenotazionebean;
+import Exceptions.UtentenonpresenteException;
 import Model.PrenotazioneModel;
-import Other.Connect;
-import Other.Stampa;
-import Query.QueryLezioni;
-import java.sql.*;
+import Other.StatoPrenotazione;
 
+import java.sql.SQLException;
+import java.util.List;
 
-public class PrenotazioneDao{
-    public void prenota(PrenotazioneModel prenotazioneModel) throws SQLException {
-        /*
-        fa la query per inserire la richiesta di ripetizione nel database
-         */
-        Connection connection;
-        Statement stmt = null;
-
-        try{
-            connection = Connect.getInstance().getDBConnection();
-            stmt = connection.createStatement();
-
-            QueryLezioni.PrenotaLezione(stmt, prenotazioneModel);
-
-        } catch (SQLException e) {
-            handleDAOException(e);
-        } finally {
-            // Chiusura delle risorse
-            closeResources(stmt,null);
-        }
-    }
-    private void closeResources(Statement stmt, ResultSet rs) {
-        try {
-            if (rs != null) {
-                rs.close();
-            }
-            if (stmt != null) {
-                stmt.close();
-            }
-        } catch (SQLException e) {
-            handleDAOException(e);
-        }
-    }
-
-
-    private void handleDAOException(Exception e) {
-        Stampa.errorPrint(String.format("PrenotazioneDAO: %s", e.getMessage()));
-    }
+public interface PrenotazioneDao {
+    public void prenota(PrenotazioneModel prenotazioneModel) throws SQLException;
+    public List<PrenotazioneModel> getPrenotazioniByEmail(String emailUtente) throws SQLException,UtentenonpresenteException;
+    public boolean deletePrenotazioneById(int IdPrenotazione,String mailUtente) throws SQLException,UtentenonpresenteException;
+    public List<PrenotazioneModel> getPrenotazioniPerIstruttore(String emailIstruttore) throws SQLException;
+    public void updateStato(int idPrenotazione, StatoPrenotazione nuovoStato) throws SQLException;
 
 }

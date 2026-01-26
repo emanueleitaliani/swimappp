@@ -1,4 +1,4 @@
-package View;
+package CLI;
 
 import Bean.CredenzialiBean;
 import Bean.Utenteloggatobean;
@@ -44,15 +44,14 @@ public class RegistrazioneCLI extends AbstractState {
         boolean isIstructor = scanner.nextLine().equalsIgnoreCase("s");
 
 
-        CredenzialiBean credenziali = new CredenzialiBean();
-        credenziali.setEmail(email);
-        credenziali.setPassword(password);
+        CredenzialiBean credenziali = new CredenzialiBean(email,password);
+
 
         // Utilizza il costruttore esistente di Utenteloggatobean
-        Utenteloggatobean utente = new Utenteloggatobean(credenziali, email, nome, cognome, isIstructor);
+        Utenteloggatobean utente = new Utenteloggatobean(credenziali, nome, cognome, isIstructor);
         utente.setNome(nome);
         utente.setCognome(cognome);
-        utente.setEmail(email);
+        utente.getCredenziali().setEmail(email);
         utente.getCredenziali().setPassword(password);
         utente.setRuolo(isIstructor);
 
@@ -83,7 +82,8 @@ public class RegistrazioneCLI extends AbstractState {
 
     @Override
     public void entry(StateMachineImpl context) {
-        super.entry(context);
+        stampaBenvenuto();
+        mostraSchermata();
     }
     @Override
     public void exit(StateMachineImpl context){

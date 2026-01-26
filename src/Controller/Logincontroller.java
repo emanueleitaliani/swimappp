@@ -18,25 +18,33 @@ public class Logincontroller {
     private boolean ruolo;
 
     public Utenteloggatobean login(CredenzialiBean credenzialiBean)throws CredenzialisbagliateException,UtentenonpresenteException{
-        CredenzialiModel credenzialiModel= new CredenzialiModel(email,password);
+        CredenzialiModel credenzialiModel = new CredenzialiModel(
+                credenzialiBean.getEmail(),
+                credenzialiBean.getPassword()
+        );
 
-        Utenteloggatobean utenteloggatobean = new Utenteloggatobean(credenzialiBean,nome,cognome,email,ruolo);
+        Utenteloggatobean utenteloggatobean = new Utenteloggatobean(credenzialiBean,nome,cognome,ruolo);
 
 
         try{
-            credenzialiModel.setEmail(credenzialiBean.getEmail());
-            credenzialiModel.setPassword(credenzialiBean.getPassword());
 
             // collegarsi al Dao per ottenere gli utenti
 
             UserDao userDAO = FactoryDao.getUserDAO();
 
             UtenteloggatoModel utenteloggatoModel = userDAO.loginMethod(credenzialiModel);
+            CredenzialiModel credenzialimodel = utenteloggatoModel.getCredenziali();
+            CredenzialiBean credenzialibean = new CredenzialiBean(
+                    credenzialimodel.getEmail(),
+                    credenzialimodel.getPassword()
+            );
 
             if (utenteloggatoModel != null && utenteloggatoModel.getCredenziali() != null) {
+
                 utenteloggatobean.setNome(utenteloggatoModel.getNome());
                 utenteloggatobean.setCognome(utenteloggatoModel.getCognome());
-                utenteloggatobean.setEmail(utenteloggatoModel.getCredenziali().getEmail());
+
+                utenteloggatobean.setCredenziali(credenzialibean);
                 utenteloggatobean.setRuolo(utenteloggatoModel.isIstructor());
                 return utenteloggatobean;
             }else {

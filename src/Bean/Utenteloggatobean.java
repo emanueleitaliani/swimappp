@@ -4,22 +4,19 @@ public class Utenteloggatobean{
     private CredenzialiBean credenzialiBean;
     private String Nome;
     private String Cognome;
-    private String Email;
     protected boolean isIstructor;
 
-    public Utenteloggatobean(CredenzialiBean credenzialiBean,String Email, String Nome, String Cognome, boolean ruolo){
+    public Utenteloggatobean(CredenzialiBean credenzialiBean, String Nome, String Cognome, boolean ruolo){
         this.credenzialiBean=credenzialiBean;
         this.Nome = Nome;
         this.Cognome = Cognome;
-        this.Email = Email;
         this.isIstructor = ruolo;
     }
 
-    public Utenteloggatobean(CredenzialiBean credenzialiBean,String Email, String Nome, String Cognome){
+    public Utenteloggatobean(CredenzialiBean credenzialiBean, String Nome, String Cognome){
         this.credenzialiBean=credenzialiBean;
         this.Nome = Nome;
         this.Cognome = Cognome;
-        this.Email = Email;
     }
     public CredenzialiBean getCredenziali(){
         return credenzialiBean;
@@ -44,13 +41,7 @@ public class Utenteloggatobean{
         this.Cognome = Cognome;
     }
 
-    public String getEmail() {
-        return Email;
-    }
 
-    public void setEmail(String Email) {
-        this.Email = Email;
-    }
     public void setRuolo(boolean role) {
         this.isIstructor = role;
     }

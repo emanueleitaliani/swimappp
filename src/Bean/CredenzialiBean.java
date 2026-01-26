@@ -5,6 +5,17 @@ public class CredenzialiBean {
     private String Email;
     private String Password;
 
+    public CredenzialiBean(String mail, String password){
+        this.Email = mail;
+        this.Password = password;
+    }
+
+    public CredenzialiBean(String mail){
+        this.Email = mail;
+        this.Password = null;
+    }
+
+
     public void setEmail(String Email) {
 
         this.Email = Email;
