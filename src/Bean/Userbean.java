@@ -26,7 +26,7 @@ public class Userbean extends Utenteloggatobean {
     public String getLevel(){
         return level;
     }
-    public void SetLevel(String level){
+    public void setLevel(String level){
         this.level=level;
     }
 }

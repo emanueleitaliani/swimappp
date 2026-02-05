@@ -28,7 +28,8 @@ public class UserCLI extends AbstractState {
             switch(choice){
                 case (1):
                     goNext(context, new GestisciPrenotazioneCLI(user));
-                    // Modificato per gestire le creazioni di schede
+                    // Modificato per gestire le creazioni di
+                    //schede
                     // opzioni per prenotare scheda
                     break;
                 case (2):
